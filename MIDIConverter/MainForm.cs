@@ -18,14 +18,14 @@ namespace MIDIConverter
             InitializeComponent();
         }
 
-		private void MainForm_Load(object sender, EventArgs e)
+		private void MainFormLoad(object sender, EventArgs e)
 		{
             this.TopMost = true;
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
 		}
 
-		private void panelView_Paint(object sender, PaintEventArgs e)
+		private void PanelViewPaint(object sender, PaintEventArgs e)
 		{
             Graphics graphics = e.Graphics;
             Pen pen = new Pen(Color.FromArgb(95, 155, 173), 1);
@@ -38,7 +38,7 @@ namespace MIDIConverter
             graphics.DrawRectangle(pen, area);
 		}
 
-		private void buttonExit_Click(object sender, EventArgs e)
+		private void ButtonExitClick(object sender, EventArgs e)
 		{
             Application.Exit();
 		}

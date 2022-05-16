@@ -117,7 +117,7 @@ namespace MIDIConverter
 			this.panelView.Name = "panelView";
 			this.panelView.Size = new System.Drawing.Size(1079, 584);
 			this.panelView.TabIndex = 5;
-			this.panelView.Paint += new System.Windows.Forms.PaintEventHandler(this.panelView_Paint);
+			this.panelView.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelViewPaint);
 			// 
 			// buttonExit
 			// 
@@ -131,7 +131,7 @@ namespace MIDIConverter
 			this.buttonExit.TabIndex = 11;
 			this.buttonExit.Text = "Exit";
 			this.buttonExit.UseVisualStyleBackColor = false;
-			this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
+			this.buttonExit.Click += new System.EventHandler(this.ButtonExitClick);
 			// 
 			// labelConvertStatus
 			// 
@@ -217,7 +217,7 @@ namespace MIDIConverter
 			this.Controls.Add(this.panelView);
 			this.Name = "MainForm";
 			this.Text = "MIDI Converter";
-			this.Load += new System.EventHandler(this.MainForm_Load);
+			this.Load += new System.EventHandler(this.MainFormLoad);
 			this.panelView.ResumeLayout(false);
 			this.ResumeLayout(false);
 
