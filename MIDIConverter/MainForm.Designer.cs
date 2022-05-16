@@ -46,7 +46,7 @@ namespace MIDIConverter
 			// 
 			// labelLoadFile
 			// 
-			this.labelLoadFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+			this.labelLoadFile.Anchor = System.Windows.Forms.AnchorStyles.Top;
 			this.labelLoadFile.BackColor = System.Drawing.Color.Transparent;
 			this.labelLoadFile.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.labelLoadFile.ForeColor = System.Drawing.Color.Black;
@@ -59,7 +59,7 @@ namespace MIDIConverter
 			// 
 			// labelSavePath
 			// 
-			this.labelSavePath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+			this.labelSavePath.Anchor = System.Windows.Forms.AnchorStyles.Top;
 			this.labelSavePath.BackColor = System.Drawing.Color.Transparent;
 			this.labelSavePath.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.labelSavePath.ForeColor = System.Drawing.Color.Black;
@@ -72,7 +72,7 @@ namespace MIDIConverter
 			// 
 			// buttonLoadFile
 			// 
-			this.buttonLoadFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+			this.buttonLoadFile.Anchor = System.Windows.Forms.AnchorStyles.Top;
 			this.buttonLoadFile.BackColor = System.Drawing.Color.WhiteSmoke;
 			this.buttonLoadFile.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.buttonLoadFile.ForeColor = System.Drawing.Color.Black;
@@ -135,7 +135,7 @@ namespace MIDIConverter
 			// 
 			// labelConvertStatus
 			// 
-			this.labelConvertStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+			this.labelConvertStatus.Anchor = System.Windows.Forms.AnchorStyles.Top;
 			this.labelConvertStatus.BackColor = System.Drawing.Color.Transparent;
 			this.labelConvertStatus.Font = new System.Drawing.Font("Times New Roman", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
 			this.labelConvertStatus.ForeColor = System.Drawing.Color.Black;
@@ -148,7 +148,7 @@ namespace MIDIConverter
 			// 
 			// labelLineDown
 			// 
-			this.labelLineDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+			this.labelLineDown.Anchor = System.Windows.Forms.AnchorStyles.Top;
 			this.labelLineDown.BackColor = System.Drawing.Color.Transparent;
 			this.labelLineDown.ForeColor = System.Drawing.Color.Black;
 			this.labelLineDown.Location = new System.Drawing.Point(157, 505);
@@ -160,7 +160,7 @@ namespace MIDIConverter
 			// 
 			// labelLineUp
 			// 
-			this.labelLineUp.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+			this.labelLineUp.Anchor = System.Windows.Forms.AnchorStyles.Top;
 			this.labelLineUp.BackColor = System.Drawing.Color.Transparent;
 			this.labelLineUp.ForeColor = System.Drawing.Color.Black;
 			this.labelLineUp.Location = new System.Drawing.Point(157, 208);
@@ -172,7 +172,7 @@ namespace MIDIConverter
 			// 
 			// buttonConvert
 			// 
-			this.buttonConvert.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+			this.buttonConvert.Anchor = System.Windows.Forms.AnchorStyles.Top;
 			this.buttonConvert.BackColor = System.Drawing.Color.WhiteSmoke;
 			this.buttonConvert.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.buttonConvert.ForeColor = System.Drawing.Color.Black;
@@ -185,7 +185,7 @@ namespace MIDIConverter
 			// 
 			// labelPath
 			// 
-			this.labelPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+			this.labelPath.Anchor = System.Windows.Forms.AnchorStyles.Top;
 			this.labelPath.BackColor = System.Drawing.Color.Transparent;
 			this.labelPath.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
 			this.labelPath.ForeColor = System.Drawing.Color.Black;
@@ -198,7 +198,7 @@ namespace MIDIConverter
 			// 
 			// buttonSavePath
 			// 
-			this.buttonSavePath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+			this.buttonSavePath.Anchor = System.Windows.Forms.AnchorStyles.Top;
 			this.buttonSavePath.BackColor = System.Drawing.Color.WhiteSmoke;
 			this.buttonSavePath.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.buttonSavePath.ForeColor = System.Drawing.Color.Black;
