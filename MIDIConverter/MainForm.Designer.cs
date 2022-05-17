@@ -31,16 +31,19 @@ namespace MIDIConverter
         {
 			this.labelLoadFile = new System.Windows.Forms.Label();
 			this.labelSavePath = new System.Windows.Forms.Label();
-			this.buttonLoadFile = new System.Windows.Forms.Button();
+			this.buttonOpenFile = new System.Windows.Forms.Button();
 			this.labelTitle = new System.Windows.Forms.Label();
 			this.panelView = new System.Windows.Forms.Panel();
+			this.labelPathOpen = new System.Windows.Forms.Label();
 			this.buttonExit = new System.Windows.Forms.Button();
 			this.labelConvertStatus = new System.Windows.Forms.Label();
 			this.labelLineDown = new System.Windows.Forms.Label();
 			this.labelLineUp = new System.Windows.Forms.Label();
 			this.buttonConvert = new System.Windows.Forms.Button();
-			this.labelPath = new System.Windows.Forms.Label();
-			this.buttonSavePath = new System.Windows.Forms.Button();
+			this.labelPathSave = new System.Windows.Forms.Label();
+			this.buttonSaveFile = new System.Windows.Forms.Button();
+			this.openFileDialogLoadFile = new System.Windows.Forms.OpenFileDialog();
+			this.saveFileDialogSaveFile = new System.Windows.Forms.SaveFileDialog();
 			this.panelView.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -50,7 +53,7 @@ namespace MIDIConverter
 			this.labelLoadFile.BackColor = System.Drawing.Color.Transparent;
 			this.labelLoadFile.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.labelLoadFile.ForeColor = System.Drawing.Color.Black;
-			this.labelLoadFile.Location = new System.Drawing.Point(3, 249);
+			this.labelLoadFile.Location = new System.Drawing.Point(15, 249);
 			this.labelLoadFile.Name = "labelLoadFile";
 			this.labelLoadFile.Size = new System.Drawing.Size(1073, 23);
 			this.labelLoadFile.TabIndex = 0;
@@ -63,25 +66,26 @@ namespace MIDIConverter
 			this.labelSavePath.BackColor = System.Drawing.Color.Transparent;
 			this.labelSavePath.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.labelSavePath.ForeColor = System.Drawing.Color.Black;
-			this.labelSavePath.Location = new System.Drawing.Point(3, 338);
+			this.labelSavePath.Location = new System.Drawing.Point(15, 356);
 			this.labelSavePath.Name = "labelSavePath";
 			this.labelSavePath.Size = new System.Drawing.Size(1073, 23);
 			this.labelSavePath.TabIndex = 1;
 			this.labelSavePath.Text = "Select the path where you want to save the converted file.";
 			this.labelSavePath.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
-			// buttonLoadFile
+			// buttonOpenFile
 			// 
-			this.buttonLoadFile.Anchor = System.Windows.Forms.AnchorStyles.Top;
-			this.buttonLoadFile.BackColor = System.Drawing.Color.WhiteSmoke;
-			this.buttonLoadFile.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.buttonLoadFile.ForeColor = System.Drawing.Color.Black;
-			this.buttonLoadFile.Location = new System.Drawing.Point(460, 287);
-			this.buttonLoadFile.Name = "buttonLoadFile";
-			this.buttonLoadFile.Size = new System.Drawing.Size(154, 28);
-			this.buttonLoadFile.TabIndex = 2;
-			this.buttonLoadFile.Text = "Load File";
-			this.buttonLoadFile.UseVisualStyleBackColor = false;
+			this.buttonOpenFile.Anchor = System.Windows.Forms.AnchorStyles.Top;
+			this.buttonOpenFile.BackColor = System.Drawing.Color.WhiteSmoke;
+			this.buttonOpenFile.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.buttonOpenFile.ForeColor = System.Drawing.Color.Black;
+			this.buttonOpenFile.Location = new System.Drawing.Point(472, 275);
+			this.buttonOpenFile.Name = "buttonOpenFile";
+			this.buttonOpenFile.Size = new System.Drawing.Size(154, 28);
+			this.buttonOpenFile.TabIndex = 2;
+			this.buttonOpenFile.Text = "Open File";
+			this.buttonOpenFile.UseVisualStyleBackColor = false;
+			this.buttonOpenFile.Click += new System.EventHandler(this.ButtonOpenFileClick);
 			// 
 			// labelTitle
 			// 
@@ -92,7 +96,7 @@ namespace MIDIConverter
 			this.labelTitle.ForeColor = System.Drawing.Color.Black;
 			this.labelTitle.Location = new System.Drawing.Point(3, 33);
 			this.labelTitle.Name = "labelTitle";
-			this.labelTitle.Size = new System.Drawing.Size(1073, 42);
+			this.labelTitle.Size = new System.Drawing.Size(1097, 42);
 			this.labelTitle.TabIndex = 4;
 			this.labelTitle.Text = "MIDI Converter";
 			this.labelTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -100,14 +104,15 @@ namespace MIDIConverter
 			// panelView
 			// 
 			this.panelView.BackColor = System.Drawing.Color.White;
+			this.panelView.Controls.Add(this.labelPathOpen);
 			this.panelView.Controls.Add(this.buttonExit);
 			this.panelView.Controls.Add(this.labelConvertStatus);
 			this.panelView.Controls.Add(this.labelLineDown);
 			this.panelView.Controls.Add(this.labelLineUp);
 			this.panelView.Controls.Add(this.buttonConvert);
-			this.panelView.Controls.Add(this.labelPath);
-			this.panelView.Controls.Add(this.buttonSavePath);
-			this.panelView.Controls.Add(this.buttonLoadFile);
+			this.panelView.Controls.Add(this.labelPathSave);
+			this.panelView.Controls.Add(this.buttonSaveFile);
+			this.panelView.Controls.Add(this.buttonOpenFile);
 			this.panelView.Controls.Add(this.labelLoadFile);
 			this.panelView.Controls.Add(this.labelSavePath);
 			this.panelView.Controls.Add(this.labelTitle);
@@ -115,9 +120,21 @@ namespace MIDIConverter
 			this.panelView.ForeColor = System.Drawing.Color.Transparent;
 			this.panelView.Location = new System.Drawing.Point(0, 0);
 			this.panelView.Name = "panelView";
-			this.panelView.Size = new System.Drawing.Size(1079, 584);
+			this.panelView.Size = new System.Drawing.Size(1103, 617);
 			this.panelView.TabIndex = 5;
 			this.panelView.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelViewPaint);
+			// 
+			// labelPathOpen
+			// 
+			this.labelPathOpen.Anchor = System.Windows.Forms.AnchorStyles.Top;
+			this.labelPathOpen.BackColor = System.Drawing.Color.Transparent;
+			this.labelPathOpen.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+			this.labelPathOpen.ForeColor = System.Drawing.Color.Black;
+			this.labelPathOpen.Location = new System.Drawing.Point(18, 306);
+			this.labelPathOpen.Name = "labelPathOpen";
+			this.labelPathOpen.Size = new System.Drawing.Size(1073, 23);
+			this.labelPathOpen.TabIndex = 12;
+			this.labelPathOpen.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// buttonExit
 			// 
@@ -125,7 +142,7 @@ namespace MIDIConverter
 			this.buttonExit.BackColor = System.Drawing.Color.WhiteSmoke;
 			this.buttonExit.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.buttonExit.ForeColor = System.Drawing.Color.Black;
-			this.buttonExit.Location = new System.Drawing.Point(960, 531);
+			this.buttonExit.Location = new System.Drawing.Point(1002, 576);
 			this.buttonExit.Name = "buttonExit";
 			this.buttonExit.Size = new System.Drawing.Size(86, 29);
 			this.buttonExit.TabIndex = 11;
@@ -139,7 +156,7 @@ namespace MIDIConverter
 			this.labelConvertStatus.BackColor = System.Drawing.Color.Transparent;
 			this.labelConvertStatus.Font = new System.Drawing.Font("Times New Roman", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
 			this.labelConvertStatus.ForeColor = System.Drawing.Color.Black;
-			this.labelConvertStatus.Location = new System.Drawing.Point(3, 531);
+			this.labelConvertStatus.Location = new System.Drawing.Point(15, 549);
 			this.labelConvertStatus.Name = "labelConvertStatus";
 			this.labelConvertStatus.Size = new System.Drawing.Size(1073, 20);
 			this.labelConvertStatus.TabIndex = 10;
@@ -151,7 +168,7 @@ namespace MIDIConverter
 			this.labelLineDown.Anchor = System.Windows.Forms.AnchorStyles.Top;
 			this.labelLineDown.BackColor = System.Drawing.Color.Transparent;
 			this.labelLineDown.ForeColor = System.Drawing.Color.Black;
-			this.labelLineDown.Location = new System.Drawing.Point(157, 505);
+			this.labelLineDown.Location = new System.Drawing.Point(169, 523);
 			this.labelLineDown.Name = "labelLineDown";
 			this.labelLineDown.Size = new System.Drawing.Size(757, 15);
 			this.labelLineDown.TabIndex = 9;
@@ -163,7 +180,7 @@ namespace MIDIConverter
 			this.labelLineUp.Anchor = System.Windows.Forms.AnchorStyles.Top;
 			this.labelLineUp.BackColor = System.Drawing.Color.Transparent;
 			this.labelLineUp.ForeColor = System.Drawing.Color.Black;
-			this.labelLineUp.Location = new System.Drawing.Point(157, 208);
+			this.labelLineUp.Location = new System.Drawing.Point(169, 208);
 			this.labelLineUp.Name = "labelLineUp";
 			this.labelLineUp.Size = new System.Drawing.Size(757, 15);
 			this.labelLineUp.TabIndex = 8;
@@ -176,44 +193,53 @@ namespace MIDIConverter
 			this.buttonConvert.BackColor = System.Drawing.Color.WhiteSmoke;
 			this.buttonConvert.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
 			this.buttonConvert.ForeColor = System.Drawing.Color.Black;
-			this.buttonConvert.Location = new System.Drawing.Point(445, 460);
+			this.buttonConvert.Location = new System.Drawing.Point(459, 462);
 			this.buttonConvert.Name = "buttonConvert";
 			this.buttonConvert.Size = new System.Drawing.Size(185, 30);
 			this.buttonConvert.TabIndex = 7;
 			this.buttonConvert.Text = "Convert";
 			this.buttonConvert.UseVisualStyleBackColor = false;
+			this.buttonConvert.Click += new System.EventHandler(this.ButtonConvertClick);
 			// 
-			// labelPath
+			// labelPathSave
 			// 
-			this.labelPath.Anchor = System.Windows.Forms.AnchorStyles.Top;
-			this.labelPath.BackColor = System.Drawing.Color.Transparent;
-			this.labelPath.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
-			this.labelPath.ForeColor = System.Drawing.Color.Black;
-			this.labelPath.Location = new System.Drawing.Point(3, 418);
-			this.labelPath.Name = "labelPath";
-			this.labelPath.Size = new System.Drawing.Size(1073, 23);
-			this.labelPath.TabIndex = 6;
-			this.labelPath.Text = "display path";
-			this.labelPath.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.labelPathSave.Anchor = System.Windows.Forms.AnchorStyles.Top;
+			this.labelPathSave.BackColor = System.Drawing.Color.Transparent;
+			this.labelPathSave.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+			this.labelPathSave.ForeColor = System.Drawing.Color.Black;
+			this.labelPathSave.Location = new System.Drawing.Point(15, 413);
+			this.labelPathSave.Name = "labelPathSave";
+			this.labelPathSave.Size = new System.Drawing.Size(1073, 23);
+			this.labelPathSave.TabIndex = 6;
+			this.labelPathSave.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
-			// buttonSavePath
+			// buttonSaveFile
 			// 
-			this.buttonSavePath.Anchor = System.Windows.Forms.AnchorStyles.Top;
-			this.buttonSavePath.BackColor = System.Drawing.Color.WhiteSmoke;
-			this.buttonSavePath.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-			this.buttonSavePath.ForeColor = System.Drawing.Color.Black;
-			this.buttonSavePath.Location = new System.Drawing.Point(460, 380);
-			this.buttonSavePath.Name = "buttonSavePath";
-			this.buttonSavePath.Size = new System.Drawing.Size(154, 35);
-			this.buttonSavePath.TabIndex = 5;
-			this.buttonSavePath.Text = "File Path";
-			this.buttonSavePath.UseVisualStyleBackColor = false;
+			this.buttonSaveFile.Anchor = System.Windows.Forms.AnchorStyles.Top;
+			this.buttonSaveFile.BackColor = System.Drawing.Color.WhiteSmoke;
+			this.buttonSaveFile.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+			this.buttonSaveFile.ForeColor = System.Drawing.Color.Black;
+			this.buttonSaveFile.Location = new System.Drawing.Point(472, 382);
+			this.buttonSaveFile.Name = "buttonSaveFile";
+			this.buttonSaveFile.Size = new System.Drawing.Size(154, 28);
+			this.buttonSaveFile.TabIndex = 5;
+			this.buttonSaveFile.Text = "Save File";
+			this.buttonSaveFile.UseVisualStyleBackColor = false;
+			this.buttonSaveFile.Click += new System.EventHandler(this.ButtonSaveFileClick);
+			// 
+			// openFileDialogLoadFile
+			// 
+			this.openFileDialogLoadFile.Filter = "MIDI |*.mid;*.midi;*.MID;*.MIDI";
+			// 
+			// saveFileDialogSaveFile
+			// 
+			this.saveFileDialogSaveFile.Filter = "Json |*.json";
 			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1079, 584);
+			this.ClientSize = new System.Drawing.Size(1103, 617);
 			this.Controls.Add(this.panelView);
 			this.Name = "MainForm";
 			this.Text = "MIDI Converter";
@@ -227,15 +253,18 @@ namespace MIDIConverter
 
 		private System.Windows.Forms.Label labelLoadFile;
 		private System.Windows.Forms.Label labelSavePath;
-		private System.Windows.Forms.Button buttonLoadFile;
+		private System.Windows.Forms.Button buttonOpenFile;
 		private System.Windows.Forms.Label labelTitle;
 		private System.Windows.Forms.Panel panelView;
-		private System.Windows.Forms.Label labelPath;
-		private System.Windows.Forms.Button buttonSavePath;
+		private System.Windows.Forms.Label labelPathSave;
+		private System.Windows.Forms.Button buttonSaveFile;
 		private System.Windows.Forms.Button buttonConvert;
 		private System.Windows.Forms.Label labelLineDown;
 		private System.Windows.Forms.Label labelLineUp;
 		private System.Windows.Forms.Label labelConvertStatus;
 		private System.Windows.Forms.Button buttonExit;
+		private System.Windows.Forms.OpenFileDialog openFileDialogLoadFile;
+		private System.Windows.Forms.SaveFileDialog saveFileDialogSaveFile;
+		private System.Windows.Forms.Label labelPathOpen;
 	}
 }

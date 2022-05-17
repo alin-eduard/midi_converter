@@ -4,15 +4,18 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 
 namespace MIDIConverter
 {
     public partial class MainForm : Form
     {
+        private MidiFile midiFile = new MidiFile();
         public MainForm()
         {
             InitializeComponent();
@@ -41,6 +44,57 @@ namespace MIDIConverter
 		private void ButtonExitClick(object sender, EventArgs e)
 		{
             Application.Exit();
+		}
+
+		private void ButtonOpenFileClick(object sender, EventArgs e)
+		{
+			try
+			{
+                if(openFileDialogLoadFile.ShowDialog() == DialogResult.OK)
+				{
+
+					var openPath = openFileDialogLoadFile.FileName;
+					var savePath = openFileDialogLoadFile.FileName.Replace(".mid", ".json");
+
+					labelPathOpen.Text = openPath;
+					labelPathSave.Text = savePath;
+					saveFileDialogSaveFile.FileName = savePath;
+
+					midiFile = IOSystem.ReadMidiFile(openPath);
+				}
+			}
+            catch(Exception ex)
+			{
+                MessageBox.Show(ex.Message);
+			}
+		}
+		private void ButtonSaveFileClick(object sender, EventArgs e)
+		{
+			try
+			{
+				if (saveFileDialogSaveFile.ShowDialog() == DialogResult.OK)
+				{
+					labelPathSave.Text = saveFileDialogSaveFile.FileName;
+				}
+			}
+			catch(Exception ex)
+			{
+				MessageBox.Show(ex.Message);
+			}
+		}
+		private void ButtonConvertClick(object sender, EventArgs e)
+		{
+			try
+			{
+				string jsonTest = JsonConvert.SerializeObject("test");
+				IOSystem.SaveJson(labelPathSave.Text, jsonTest);
+				labelConvertStatus.Text = "File was successfully converted!";
+			}
+			catch(Exception ex)
+			{
+				MessageBox.Show(ex.Message);
+				labelConvertStatus.Text = "File was not converted successfully!";
+			}
 		}
 	}
 }
