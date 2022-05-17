@@ -4,15 +4,18 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 
 namespace MIDIConverter
 {
     public partial class MainForm : Form
     {
+        private MidiFile midiFile = new MidiFile();
         public MainForm()
         {
             InitializeComponent();
@@ -41,6 +44,40 @@ namespace MIDIConverter
 		private void ButtonExitClick(object sender, EventArgs e)
 		{
             Application.Exit();
+		}
+
+		private void ButtonOpenFileClick(object sender, EventArgs e)
+		{
+			try
+			{
+                if(openFileDialogLoadFile.ShowDialog() == DialogResult.OK)
+				{
+					var openPath = openFileDialogLoadFile.FileName;
+					labelPathOpen.Text = openPath;
+					midiFile = MyIO.ReadMidiFile(openPath);
+				}
+			}
+            catch(Exception ex)
+			{
+                MessageBox.Show(ex.Message);
+			}
+		}
+		private void ButtonSaveFileClick(object sender, EventArgs e)
+		{
+			try
+			{
+				if(saveFileDialogSaveFile.ShowDialog() == DialogResult.OK)
+				{
+					var savePath = saveFileDialogSaveFile.FileName;
+					labelPathSave.Text = savePath;
+					string jsonTest = JsonConvert.SerializeObject("test");
+					MyIO.SaveJsone(savePath, jsonTest);
+				}
+			}
+			catch(Exception ex)
+			{
+				MessageBox.Show(ex.Message);
+			}
 		}
 	}
 }
