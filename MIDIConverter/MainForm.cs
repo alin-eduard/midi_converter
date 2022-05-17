@@ -52,9 +52,15 @@ namespace MIDIConverter
 			{
                 if(openFileDialogLoadFile.ShowDialog() == DialogResult.OK)
 				{
+
 					var openPath = openFileDialogLoadFile.FileName;
+					var savePath = openFileDialogLoadFile.FileName.Replace(".mid", ".json");
+
 					labelPathOpen.Text = openPath;
-					midiFile = MyIO.ReadMidiFile(openPath);
+					labelPathSave.Text = savePath;
+					saveFileDialogSaveFile.FileName = savePath;
+
+					midiFile = IOSystem.ReadMidiFile(openPath);
 				}
 			}
             catch(Exception ex)
@@ -66,17 +72,28 @@ namespace MIDIConverter
 		{
 			try
 			{
-				if(saveFileDialogSaveFile.ShowDialog() == DialogResult.OK)
+				if (saveFileDialogSaveFile.ShowDialog() == DialogResult.OK)
 				{
-					var savePath = saveFileDialogSaveFile.FileName;
-					labelPathSave.Text = savePath;
-					string jsonTest = JsonConvert.SerializeObject("test");
-					MyIO.SaveJsone(savePath, jsonTest);
+					labelPathSave.Text = saveFileDialogSaveFile.FileName;
 				}
 			}
 			catch(Exception ex)
 			{
 				MessageBox.Show(ex.Message);
+			}
+		}
+		private void ButtonConvertClick(object sender, EventArgs e)
+		{
+			try
+			{
+				string jsonTest = JsonConvert.SerializeObject("test");
+				IOSystem.SaveJson(labelPathSave.Text, jsonTest);
+				labelConvertStatus.Text = "File was successfully converted!";
+			}
+			catch(Exception ex)
+			{
+				MessageBox.Show(ex.Message);
+				labelConvertStatus.Text = "File was not converted successfully!";
 			}
 		}
 	}

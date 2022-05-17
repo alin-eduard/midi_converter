@@ -199,6 +199,7 @@ namespace MIDIConverter
 			this.buttonConvert.TabIndex = 7;
 			this.buttonConvert.Text = "Convert";
 			this.buttonConvert.UseVisualStyleBackColor = false;
+			this.buttonConvert.Click += new System.EventHandler(this.ButtonConvertClick);
 			// 
 			// labelPathSave
 			// 
@@ -228,7 +229,11 @@ namespace MIDIConverter
 			// 
 			// openFileDialogLoadFile
 			// 
-			this.openFileDialogLoadFile.FileName = "openFileDialogLoadFile";
+			this.openFileDialogLoadFile.Filter = "MIDI |*.mid;*.midi;*.MID;*.MIDI";
+			// 
+			// saveFileDialogSaveFile
+			// 
+			this.saveFileDialogSaveFile.Filter = "Json |*.json";
 			// 
 			// MainForm
 			// 

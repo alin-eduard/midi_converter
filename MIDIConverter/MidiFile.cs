@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace MIDIConverter
 {
@@ -19,6 +17,7 @@ namespace MIDIConverter
 
         public MidiFile()
 		{ }
+
         public MidiFile(Stream stream)
             : this(Reader.ReadAllBytesFromStream(stream))
         {
