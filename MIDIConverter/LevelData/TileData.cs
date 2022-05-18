@@ -6,6 +6,7 @@ namespace MIDIConverter.LevelData
         private float length;
         private int life;
         private TileType type;
+        private int note;
 
         public Position Position
         {
@@ -24,7 +25,11 @@ namespace MIDIConverter.LevelData
             get => life;
             set => life = value;
         }
-
+        public int Note 
+        {
+            get => note;
+            set => note = value;
+        }
         public TileType Type
         {
             get => type;

@@ -80,28 +80,46 @@ namespace MIDIConverter
 		{
 			try
 			{
-				// In progress
-				LevelData.LevelData date = new LevelData.LevelData("test", LevelData.LevelDifficulty.Medium, "test");
+				string[] path = openFileDialogLoadFile.FileName.Split(new char[] { '\\' });
+				string songName = path[path.Length - 1].Replace(".mid", "");
+				string levelName = songName;
 				Random random = new Random();
 				int rowPosition;
 
+				LevelData.LevelData date = new LevelData.LevelData(levelName, LevelData.LevelDifficulty.Medium, songName);
+
 				foreach (var track in midiFile.Tracks)
 				{
-
 					foreach (var midiEvent in track.MidiEvents)
 					{
 						if (!(midiEvent.MidiEventType == MidiEventType.MetaEvent))
 						{
-							rowPosition = random.Next(0, 4);
-
-							LevelData.TileData tile = new LevelData.TileData
+							if (MidiEventType.NoteOn == midiEvent.MidiEventType)
 							{
-								Position = new LevelData.Position { X = rowPosition, Y = midiEvent.Time },
-								Length = 2,
-								Type = LevelData.TileType.normal,
-								Life = 1
-							};
-							date.TilesData[rowPosition].Add(tile);
+								rowPosition = random.Next(0, 4);
+
+								LevelData.TileData tile = new LevelData.TileData
+								{
+									Position = new LevelData.Position { X = rowPosition, Y = midiEvent.Time },
+									Length = 0,
+									Type = LevelData.TileType.normal,
+									Life = 1,
+									Note = midiEvent.Arg2
+								};
+								date.TilesData[rowPosition].Add(tile);
+							}
+							if(MidiEventType.NoteOff == midiEvent.MidiEventType)
+							{
+								foreach (var row in date.TilesData)
+								{
+									foreach (var tile in row)
+										if (tile.Note == midiEvent.Arg2 && tile.Length == 0)
+										{
+											tile.Length = midiEvent.Time - tile.Position.Y;
+											break;
+										}
+								}
+							}
 						}
 					}
 				}
