@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using Newtonsoft.Json;
+
+using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Newtonsoft.Json;
 
 namespace MIDIConverter
 {
-    public partial class MainForm : Form
+	public partial class MainForm : Form
     {
         private MidiFile midiFile = new MidiFile();
         public MainForm()
@@ -86,7 +80,33 @@ namespace MIDIConverter
 		{
 			try
 			{
-				string jsonTest = JsonConvert.SerializeObject("test");
+				// In progress
+				LevelData.LevelData date = new LevelData.LevelData("test", LevelData.LevelDifficulty.Medium, "test");
+				Random random = new Random();
+				int rowPosition;
+
+				foreach (var track in midiFile.Tracks)
+				{
+
+					foreach (var midiEvent in track.MidiEvents)
+					{
+						if (!(midiEvent.MidiEventType == MidiEventType.MetaEvent))
+						{
+							rowPosition = random.Next(0, 4);
+
+							LevelData.TileData tile = new LevelData.TileData
+							{
+								Position = new LevelData.Position { X = rowPosition, Y = midiEvent.Time },
+								Length = 2,
+								Type = LevelData.TileType.normal,
+								Life = 1
+							};
+							date.TilesData[rowPosition].Add(tile);
+						}
+					}
+				}
+
+				string jsonTest = JsonConvert.SerializeObject(date);
 				IOSystem.SaveJson(labelPathSave.Text, jsonTest);
 				labelConvertStatus.Text = "File was successfully converted!";
 			}

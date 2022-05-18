@@ -9,6 +9,18 @@ namespace MIDIConverter.LevelData
         private LevelDifficulty difficulty;
         private string song;
 
+        public LevelData(string levelName, LevelDifficulty difficulty, string song)
+		{
+            this.levelName = levelName;
+            this.song = song;
+            this.difficulty = difficulty;
+            tilesData = new List<List<TileData>>{
+                new List<TileData> { },
+                new List<TileData> { },
+                new List<TileData> { },
+                new List<TileData> { },
+            };
+        }
         public string LevelName
         {
             get => levelName; 
