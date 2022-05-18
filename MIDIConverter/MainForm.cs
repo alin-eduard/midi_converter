@@ -62,6 +62,7 @@ namespace MIDIConverter
                 MessageBox.Show(ex.Message);
 			}
 		}
+
 		private void ButtonSaveFileClick(object sender, EventArgs e)
 		{
 			try
@@ -76,6 +77,7 @@ namespace MIDIConverter
 				MessageBox.Show(ex.Message);
 			}
 		}
+
 		private void ButtonConvertClick(object sender, EventArgs e)
 		{
 			try
@@ -108,6 +110,7 @@ namespace MIDIConverter
 								};
 								date.TilesData[rowPosition].Add(tile);
 							}
+
 							if(MidiEventType.NoteOff == midiEvent.MidiEventType)
 							{
 								foreach (var row in date.TilesData)

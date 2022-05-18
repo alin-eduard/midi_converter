@@ -25,11 +25,13 @@ namespace MIDIConverter.LevelData
             get => life;
             set => life = value;
         }
+
         public int Note 
         {
             get => note;
             set => note = value;
         }
+
         public TileType Type
         {
             get => type;
