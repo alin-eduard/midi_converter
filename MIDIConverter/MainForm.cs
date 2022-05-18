@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using Newtonsoft.Json;
+
+using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Newtonsoft.Json;
 
 namespace MIDIConverter
 {
-    public partial class MainForm : Form
+	public partial class MainForm : Form
     {
         private MidiFile midiFile = new MidiFile();
         public MainForm()
@@ -68,6 +62,7 @@ namespace MIDIConverter
                 MessageBox.Show(ex.Message);
 			}
 		}
+
 		private void ButtonSaveFileClick(object sender, EventArgs e)
 		{
 			try
@@ -82,11 +77,57 @@ namespace MIDIConverter
 				MessageBox.Show(ex.Message);
 			}
 		}
+
 		private void ButtonConvertClick(object sender, EventArgs e)
 		{
 			try
 			{
-				string jsonTest = JsonConvert.SerializeObject("test");
+				string[] path = openFileDialogLoadFile.FileName.Split(new char[] { '\\' });
+				string songName = path[path.Length - 1].Replace(".mid", "");
+				string levelName = songName;
+				Random random = new Random();
+				int rowPosition;
+
+				LevelData.LevelData date = new LevelData.LevelData(levelName, LevelData.LevelDifficulty.Medium, songName);
+
+				foreach (var track in midiFile.Tracks)
+				{
+					foreach (var midiEvent in track.MidiEvents)
+					{
+						if (!(midiEvent.MidiEventType == MidiEventType.MetaEvent))
+						{
+							if (MidiEventType.NoteOn == midiEvent.MidiEventType)
+							{
+								rowPosition = random.Next(0, 4);
+
+								LevelData.TileData tile = new LevelData.TileData
+								{
+									Position = new LevelData.Position { X = rowPosition, Y = midiEvent.Time },
+									Length = 0,
+									Type = LevelData.TileType.normal,
+									Life = 1,
+									Note = midiEvent.Arg2
+								};
+								date.TilesData[rowPosition].Add(tile);
+							}
+
+							if(MidiEventType.NoteOff == midiEvent.MidiEventType)
+							{
+								foreach (var row in date.TilesData)
+								{
+									foreach (var tile in row)
+										if (tile.Note == midiEvent.Arg2 && tile.Length == 0)
+										{
+											tile.Length = midiEvent.Time - tile.Position.Y;
+											break;
+										}
+								}
+							}
+						}
+					}
+				}
+
+				string jsonTest = JsonConvert.SerializeObject(date);
 				IOSystem.SaveJson(labelPathSave.Text, jsonTest);
 				labelConvertStatus.Text = "File was successfully converted!";
 			}

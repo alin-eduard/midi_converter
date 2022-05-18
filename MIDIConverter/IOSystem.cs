@@ -11,9 +11,9 @@ namespace MIDIConverter
 
 		public static void SaveJson(string path, string jsone)
 		{
-			BinaryWriter bw = new BinaryWriter(File.Create(path));
-			bw.Write(jsone);
-			bw.Dispose();
+			StreamWriter streamWriter = new StreamWriter(File.Create(path));
+			streamWriter.Write(jsone);
+			streamWriter.Close();
 		}
 	}
 }
