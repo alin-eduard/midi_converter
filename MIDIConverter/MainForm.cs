@@ -87,6 +87,8 @@ namespace MIDIConverter
 				string levelName = songName;
 				Random random = new Random();
 				int rowPosition;
+				float tempo = 0;
+				float secondsPerTick = 0;
 
 				LevelData.LevelData date = new LevelData.LevelData(levelName, LevelData.LevelDifficulty.Medium, songName);
 
@@ -94,7 +96,15 @@ namespace MIDIConverter
 				{
 					foreach (var midiEvent in track.MidiEvents)
 					{
-						if (!(midiEvent.MidiEventType == MidiEventType.MetaEvent))
+						if (midiEvent.MidiEventType == MidiEventType.MetaEvent)
+						{
+							if (midiEvent.MetaEventType == MetaEventType.Tempo)
+							{
+								tempo = midiEvent.Arg2;
+								secondsPerTick = (tempo * midiFile.TicksPerQuarterNote) / 60000;
+							}
+						}
+						else
 						{
 							if (MidiEventType.NoteOn == midiEvent.MidiEventType)
 							{
@@ -102,7 +112,7 @@ namespace MIDIConverter
 
 								LevelData.TileData tile = new LevelData.TileData
 								{
-									Position = new LevelData.Position { X = rowPosition, Y = midiEvent.Time },
+									Position = new LevelData.Position { X = rowPosition, Y = (secondsPerTick * midiEvent.Time) / 1000 },
 									Length = 0,
 									Type = LevelData.TileType.normal,
 									Life = 1,
@@ -110,8 +120,7 @@ namespace MIDIConverter
 								};
 								date.TilesData[rowPosition].Add(tile);
 							}
-
-							if(MidiEventType.NoteOff == midiEvent.MidiEventType)
+/*							if(MidiEventType.NoteOff == midiEvent.MidiEventType)
 							{
 								foreach (var row in date.TilesData)
 								{
@@ -122,11 +131,10 @@ namespace MIDIConverter
 											break;
 										}
 								}
-							}
+							}*/
 						}
 					}
 				}
-
 				string jsonTest = JsonConvert.SerializeObject(date);
 				IOSystem.SaveJson(labelPathSave.Text, jsonTest);
 				labelConvertStatus.Text = "File was successfully converted!";
