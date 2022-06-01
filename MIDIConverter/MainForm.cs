@@ -17,9 +17,6 @@ namespace MIDIConverter
 
 		private void MainFormLoad(object sender, EventArgs e)
 		{
-            this.TopMost = true;
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
 		}
 
 		private void PanelViewPaint(object sender, PaintEventArgs e)
@@ -101,7 +98,7 @@ namespace MIDIConverter
 							if (midiEvent.MetaEventType == MetaEventType.Tempo)
 							{
 								tempo = midiEvent.Arg2;
-								secondsPerTick = (tempo * midiFile.TicksPerQuarterNote) / 60000;
+								//secondsPerTick = 60000 / (tempo * midiFile.TicksPerQuarterNote);
 							}
 						}
 						else
@@ -112,7 +109,7 @@ namespace MIDIConverter
 
 								LevelData.TileData tile = new LevelData.TileData
 								{
-									Position = new LevelData.Position { X = rowPosition, Y = (secondsPerTick * midiEvent.Time) / 1000 },
+									Position = new LevelData.Position { X = rowPosition, Y = 60000 / tempo / 96f * midiEvent.Time / 1000f},
 									Length = 0,
 									Type = LevelData.TileType.normal,
 									Life = 1,
